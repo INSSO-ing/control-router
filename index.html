@@ -303,12 +303,34 @@
 
 <script>
     let dispositivos = [
-        { nombre: "Smart TV - Living", ip: "192.168.100.15", mac: "AA:BB:CC:11:22:33", tipo: "Wi-Fi 2.4G", online: true, consumoGB: 145.2, maxPlan: 300 },
-        { nombre: "PC Escritorio - Principal", ip: "192.168.100.33", mac: "1A:2B:3C:4D:5E:6F", tipo: "Cable LAN (LAN1)", online: true, consumoGB: 98.5, maxPlan: 300 },
-        { nombre: "Celular Personal (Michael)", ip: "192.168.100.5", mac: "7A:8B:9C:0D:1E:2F", tipo: "Wi-Fi 5G", online: true, consumoGB: 54.7, maxPlan: 300 },
-        { nombre: "Notebook - Oficina", ip: "192.168.100.102", mac: "00:11:22:33:44:55", tipo: "Wi-Fi 5G", online: false, consumoGB: 12.4, maxPlan: 300 },
-        { nombre: "Cámara Seguridad - Entrada", ip: "192.168.100.20", mac: "FF:EE:DD:CC:BB:AA", tipo: "Wi-Fi 2.4G", online: true, consumoGB: 85.1, maxPlan: 300 }
-    ];
+    {
+        "nombre": "Smart TV - Living",
+        "ip": "192.168.100.15",
+        "mac": "AA:BB:CC:11:22:33",
+        "tipo": "Wi-Fi 2.4G",
+        "online": true,
+        "consumoGB": 158.4,
+        "maxPlan": 300
+    },
+    {
+        "nombre": "PC Escritorio - Principal",
+        "ip": "192.168.100.33",
+        "mac": "1A:2B:3C:4D:5E:6F",
+        "tipo": "Cable LAN (LAN1)",
+        "online": true,
+        "consumoGB": 112.1,
+        "maxPlan": 300
+    },
+    {
+        "nombre": "Celular Michael",
+        "ip": "192.168.100.5",
+        "mac": "7A:8B:9C:0D:1E:2F",
+        "tipo": "Wi-Fi 5G",
+        "online": true,
+        "consumoGB": 64.2,
+        "maxPlan": 300
+    }
+]];
 
     function renderizarPanel() {
         const cuerpo = document.getElementById("tabla-cuerpo");
