@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Monitoreo de Red - Huawei HG8145V5</title>
+    <title>Panel de Monitoreo de Red Real - Huawei HG8145V5</title>
     <style>
         :root {
-            --bg-color: #f0f4f8;
+            --bg-color: #f1f5f9;
             --panel-bg: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --accent-blue: #0284c7;
-            --accent-green: #22c55e;
-            --accent-orange: #f97316;
-            --accent-red: #ef4444;
-            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-blue: #2563eb;
+            --accent-green: #16a34a;
+            --accent-orange: #ea580c;
+            --accent-red: #dc2626;
+            --border-color: #cbd5e1;
         }
 
         * {
@@ -31,17 +31,22 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1250px;
             margin: 0 auto;
         }
 
         header {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             color: white;
             padding: 25px;
             border-radius: 12px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         header h1 {
@@ -50,61 +55,66 @@
         }
 
         header p {
-            color: #93c5fd;
+            color: #94a3b8;
             font-size: 14px;
         }
 
+        .update-badge {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #38bdf8;
+        }
+
         .fiber-alert {
-            background-color: #fffbeb;
+            background-color: #fff7ed;
             border-left: 4px solid var(--accent-orange);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 25px;
             font-size: 14px;
-            color: #b45309;
+            color: #c2410c;
         }
 
+        /* Resumen superior */
         .grid-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 25px;
         }
 
-        .card {
+        .card-stat {
             background: var(--panel-bg);
             padding: 20px;
             border-radius: 10px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
 
-        .card h3 {
-            font-size: 13px;
+        .card-stat h3 {
+            font-size: 12px;
             color: var(--text-secondary);
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
 
-        .card .value {
-            font-size: 24px;
+        .card-stat .value {
+            font-size: 26px;
             font-weight: bold;
-            color: var(--text-primary);
         }
 
-        .card .subtext {
-            font-size: 12px;
-            margin-top: 5px;
-        }
-
+        /* Secciones */
         .main-layout {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 25px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
@@ -113,282 +123,282 @@
         .panel {
             background: var(--panel-bg);
             border-radius: 12px;
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
             margin-bottom: 25px;
         }
 
         .panel h2 {
             font-size: 18px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             color: var(--text-primary);
-            border-bottom: 2px solid var(--bg-color);
-            padding-bottom: 8px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            background-color: var(--bg-color);
-            color: var(--text-secondary);
-            font-size: 12px;
-            text-transform: uppercase;
-            padding: 12px;
-            font-weight: 600;
-        }
-
-        td {
-            padding: 14px 12px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 14px;
-        }
-
-        tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .badge-online { background-color: #dcfce7; color: #15803d; }
-        .badge-offline { background-color: #f1f5f9; color: #64748b; }
-        
-        .badge-5g { background-color: #e0f2fe; color: #0369a1; }
-        .badge-24g { background-color: #fef3c7; color: #b45309; }
-        .badge-lan { background-color: #f3e8ff; color: #6b21a8; }
 
         .actions-bar {
             display: flex;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-
-        .btn {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .btn:hover { background-color: #0369a1; }
-        .btn-secondary { background-color: var(--text-secondary); }
-        .btn-secondary:hover { background-color: #475569; }
 
         .search-input {
-            padding: 9px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            padding: 10px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
             font-size: 14px;
+            outline: none;
         }
 
-        .progress-container {
+        .search-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Tarjetas de Dispositivos Individuales */
+        .devices-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .device-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .device-info {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .device-info h4 {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .device-info p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-family: monospace;
+            margin-top: 2px;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-online { background-color: #dcfce7; color: #16a34a; }
+        .badge-offline { background-color: #f1f5f9; color: #64748b; }
+        .badge-5g { background-color: #e0f2fe; color: #0369a1; }
+        .badge-24g { background-color: #fef3c7; color: #d97706; }
+        .badge-lan { background-color: #f3e8ff; color: #7c3aed; }
+
+        .device-consumption {
+            min-width: 200px;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            .device-consumption { text-align: left; width: 100%; }
+        }
+
+        .consumption-value {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .progress-bg {
             width: 100%;
-            background-color: var(--border-color);
+            background-color: #e2e8f0;
             border-radius: 4px;
-            height: 8px;
+            height: 6px;
+            margin-top: 6px;
             overflow: hidden;
-            margin-top: 5px;
         }
 
-        .progress-bar {
+        .progress-fill {
             height: 100%;
             background-color: var(--accent-blue);
             border-radius: 4px;
+            transition: width 0.5s ease;
         }
 
-        .high-consumption {
-            color: var(--accent-red);
-            font-weight: 600;
+        /* Alertas Laterales */
+        .vampire-item {
+            padding: 12px;
+            border-radius: 8px;
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            margin-bottom: 10px;
+            font-size: 13px;
         }
+
+        .vampire-item strong { color: var(--accent-red); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>🌐 Panel de Control e Historial de Red</h1>
-        <p>Modelo de Hardware: Huawei HG8145V5 | Proveedor: Personal (Fibra Óptica)</p>
+        <div>
+            <h1>🌐 Panel de Consumo de Red Eléctrico e Internet</h1>
+            <p>Monitoreo Automatizado de Hardware | Huawei HG8145V5</p>
+        </div>
+        <div class="update-badge" id="live-clock">Sincronizado vía script</div>
     </header>
 
     <div class="fiber-alert">
-        <strong>⚠️ Alerta Óptica de Hardware:</strong> La potencia RX medida en el módem es de <strong>-26.78 dBm</strong>. Está al borde de la pérdida física de sincronismo (-27 dBm). Esta atenuación obliga al procesador a descartar paquetes y suele bloquear las bocas LAN en Fast Ethernet (100 Mbps). Revisar atenuación externa.
+        <strong>⚠️ Alerta del Estado Físico:</strong> Pérdida de potencia óptica en puerto RX externa detectada. La velocidad en puertos LAN se autolimita a Fast Ethernet (100 Mbps) para mitigar errores de verificación de CRC.
     </div>
 
     <div class="grid-stats">
-        <div class="card">
-            <h3>Dispositivos Activos</h3>
-            <div class="value" id="stat-activos">0 / 0</div>
-            <div class="subtext" style="color: var(--accent-green);">● En línea ahora</div>
+        <div class="card-stat">
+            <h3>Equipos Conectados</h3>
+            <div class="value" id="total-online" style="color: var(--accent-green);">0 / 0</div>
         </div>
-        <div class="card">
-            <h3>Consumo Total Mensual</h3>
-            <div class="value" id="stat-total-gb">0 GB</div>
-            <div class="subtext" style="color: var(--text-secondary);">Acumulado en la red</div>
+        <div class="card-stat">
+            <h3>Consumo Total de Red</h3>
+            <div class="value" id="net-total-gb" style="color: var(--accent-blue);">0.0 GB</div>
         </div>
-        <div class="card">
-            <h3>Banda Más Saturada</h3>
-            <div class="value" style="color: var(--accent-orange);">Wi-Fi 2.4 GHz</div>
-            <div class="subtext" style="color: var(--accent-red);">Tope práctico: 35 Mbps</div>
-        </div>
-        <div class="card">
-            <h3>Capacidad Máxima LAN</h3>
-            <div class="value" style="color: var(--accent-blue);">100 Mbps</div>
-            <div class="subtext" style="color: var(--text-secondary);">Requiere calibración física</div>
+        <div class="card-stat">
+            <h3>Dispositivos Excedidos</h3>
+            <div class="value" id="total-vampiros" style="color: var(--accent-orange);">0</div>
         </div>
     </div>
 
     <div class="main-layout">
         <div class="panel">
-            <h2>Lista Completa de Dispositivos y Tráfico de Datos</h2>
-            
+            <h2>Consumo de Datos por Terminal</h2>
             <div class="actions-bar">
-                <input type="text" id="busqueda" class="search-input" placeholder="Buscar por nombre o IP..." onkeyup="filtrarTabla()">
-                <button class="btn" onclick="actualizarConsumos()">🔄 Simular Consumo en Vivo</button>
-                <button class="btn btn-secondary" onclick="restablecerContadores()">Limpiar Historial</button>
+                <input type="text" id="buscador" class="search-input" placeholder="Buscar por equipo, IP o MAC..." onkeyup="filtrarDispositivos()">
             </div>
 
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Dispositivo</th>
-                            <th>IP / MAC</th>
-                            <th>Tipo de Conexión</th>
-                            <th>Estado</th>
-                            <th>Tráfico Consumido</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-cuerpo">
-                        </tbody>
-                </table>
-            </div>
+            <div class="devices-container" id="lista-dispositivos">
+                </div>
         </div>
 
         <div>
             <div class="panel">
-                <h2>Vampiros de Ancho de Banda</h2>
-                <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">
-                    Dispositivos con picos de consumo críticos:
-                </p>
-                <div id="panel-vampiros"></div>
+                <h2>Alertas de Almacenamiento y Tráfico</h2>
+                <div id="contenedor-vampiros">
+                    </div>
             </div>
 
             <div class="panel">
-                <h2>Configuraciones Recomendadas</h2>
-                <ul style="font-size: 13px; color: var(--text-primary); padding-left: 20px; line-height: 1.6;">
-                    <li style="margin-bottom: 8px;"><strong>Separar Bandas:</strong> Apagá el Smart Connect para fijar PCs importantes a la red 5G (+240 Mbps).</li>
-                    <li><strong>Infraestructura:</strong> Recordá usar cableado integral <strong>Cat 5e o Cat 6</strong> de 8 hilos para romper la barrera de los 100 Mb.</li>
-                </ul>
+                <h2>Notas de Optimización</h2>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                    Este panel lee de forma asíncrona la tabla de asignación DHCP del módem principal. Si algún terminal no se reconoce, podés asignarle una IP fija en el rango intermedio del enrutador.
+                </p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    // ========================================================================
+    // EL SCRIPT DE PYTHON REEMPLAZARÁ AUTOMÁTICAMENTE ESTA VARIABLE CON TUS DATOS
+    // ========================================================================
     let dispositivos = [
-    {
-        "nombre": "Smart TV - Living",
-        "ip": "192.168.100.15",
-        "mac": "AA:BB:CC:11:22:33",
-        "tipo": "Wi-Fi 2.4G",
-        "online": true,
-        "consumoGB": 158.4,
-        "maxPlan": 300
-    },
-    {
-        "nombre": "PC Escritorio - Principal",
-        "ip": "192.168.100.33",
-        "mac": "1A:2B:3C:4D:5E:6F",
-        "tipo": "Cable LAN (LAN1)",
-        "online": true,
-        "consumoGB": 112.1,
-        "maxPlan": 300
-    },
-    {
-        "nombre": "Celular Michael",
-        "ip": "192.168.100.5",
-        "mac": "7A:8B:9C:0D:1E:2F",
-        "tipo": "Wi-Fi 5G",
-        "online": true,
-        "consumoGB": 64.2,
-        "maxPlan": 300
-    }
-]];
+        { "nombre": "Smart TV - Living", "ip": "192.168.100.15", "mac": "AA:BB:CC:11:22:33", "tipo": "Wi-Fi 2.4G", "online": true, "consumoGB": 158.4, "maxPlan": 300 },
+        { "nombre": "PC Escritorio - Principal", "ip": "192.168.100.33", "mac": "1A:2B:3C:4D:5E:6F", "tipo": "Cable LAN (LAN1)", "online": true, "consumoGB": 112.1, "maxPlan": 300 },
+        { "nombre": "Celular Michael", "ip": "192.168.100.5", "mac": "7A:8B:9C:0D:1E:2F", "tipo": "Wi-Fi 5G", "online": true, "consumoGB": 64.2, "maxPlan": 300 }
+    ];
 
-    function renderizarPanel() {
-        const cuerpo = document.getElementById("tabla-cuerpo");
-        cuerpo.innerHTML = "";
-        let totalGB = 0, activos = 0, listaVampirosHTML = "";
+    function actualizarInterfaz() {
+        const contenedor = document.getElementById("lista-dispositivos");
+        const contenedorVampiros = document.getElementById("contenedor-vampiros");
+        contenedor.innerHTML = "";
+        contenedorVampiros.innerHTML = "";
 
-        dispositivos.forEach(disp => {
-            totalGB += disp.consumoGB;
-            if (disp.online) activos++;
+        let totalGB = 0;
+        let onlineCount = 0;
+        let vampirosCount = 0;
 
-            let tipoClass = disp.tipo.includes("5G") ? "badge-5g" : (disp.tipo.includes("LAN") ? "badge-lan" : "badge-24g");
-            let porcentaje = Math.min((disp.consumoGB / disp.maxPlan) * 100, 100);
-            let consumoStyle = disp.consumoGB > 80 ? "class='high-consumption'" : "";
+        dispositivos.forEach(d => {
+            totalGB += d.consumoGB;
+            if (d.online) onlineCount++;
 
-            cuerpo.innerHTML += `
-                <tr>
-                    <td><strong>${disp.nombre}</strong></td>
-                    <td style="color: var(--text-secondary); font-family: monospace;">${disp.ip}<br>${disp.mac}</td>
-                    <td><span class="badge ${tipoClass}">${disp.tipo}</span></td>
-                    <td><span class="badge ${disp.online ? 'badge-online' : 'badge-offline'}">${disp.online ? 'En Línea' : 'Desconectado'}</span></td>
-                    <td>
-                        <span ${consumoStyle}>${disp.consumoGB.toFixed(1)} GB</span>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: ${porcentaje}%; background-color: ${disp.consumoGB > 80 ? 'var(--accent-orange)' : 'var(--accent-blue)'}"></div>
+            // Determinar estilo de badge de conexión
+            let badgeTipo = "badge-24g";
+            if (d.tipo.includes("5G")) badgeTipo = "badge-5g";
+            if (d.tipo.includes("LAN")) badgeTipo = "badge-lan";
+
+            let porcentaje = Math.min((d.consumoGB / d.maxPlan) * 100, 100);
+            let barColor = d.consumoGB > 100 ? "var(--accent-orange)" : "var(--accent-blue)";
+
+            // Generar fila visual
+            contenedor.innerHTML += `
+                <div class="device-row">
+                    <div class="device-info">
+                        <h4>${d.nombre}</h4>
+                        <p>IP: ${d.ip} | MAC: ${d.mac}</p>
+                    </div>
+                    <div>
+                        <span class="badge ${badgeTipo}">${d.tipo}</span>
+                        <span class="badge ${d.online ? 'badge-online' : 'badge-offline'}">${d.online ? 'En línea' : 'Inactivo'}</span>
+                    </div>
+                    <div class="device-consumption">
+                        <span class="consumption-value" style="color: ${d.consumoGB > 100 ? 'var(--accent-red)' : 'var(--text-primary)'}">${d.consumoGB.toFixed(1)} GB</span>
+                        <div class="progress-bg">
+                            <div class="progress-fill" style="width: ${porcentaje}%; background-color: ${barColor}"></div>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                </div>
             `;
 
-            if (disp.consumoGB > 80) {
-                listaVampirosHTML += `<div style="padding: 8px 0; border-bottom: 1px solid var(--border-color); font-size: 13px;">⚠️ <strong>${disp.nombre}</strong>: <span class="high-consumption">${disp.consumoGB.toFixed(1)} GB</span></div>`;
+            // Detectar si excede los 100GB
+            if (d.consumoGB > 100) {
+                vampirosCount++;
+                contenedorVampiros.innerHTML += `
+                    <div class="vampire-item">
+                        ⚠️ <strong>${d.nombre}</strong> registra un consumo elevado de <strong>${d.consumoGB.toFixed(1)} GB</strong>.
+                    </div>
+                `;
             }
         });
 
-        document.getElementById("stat-activos").innerText = `${activos} / ${dispositivos.length}`;
-        document.getElementById("stat-total-gb").innerText = `${totalGB.toFixed(1)} GB`;
-        document.getElementById("panel-vampiros").innerHTML = listaVampirosHTML || "<p style='font-size:13px; color:var(--accent-green);'>Tráfico bajo control.</p>";
+        // Actualizar contadores globales
+        document.getElementById("total-online").innerText = `${onlineCount} / ${dispositivos.length}`;
+        document.getElementById("net-total-gb").innerText = `${totalGB.toFixed(1)} GB`;
+        document.getElementById("total-vampiros").innerText = vampirosCount;
+        
+        if (vampirosCount === 0) {
+            contenedorVampiros.innerHTML = "<p style='font-size:13px; color:var(--accent-green);'>🟢 Todos los terminales dentro del umbral normal.</p>";
+        }
+
+        // Estampa de tiempo actual
+        const ahora = new Date();
+        document.getElementById("live-clock").innerText = `Última lectura: ${ahora.toLocaleTimeString()}`;
     }
 
-    function filtrarTabla() {
-        const query = document.getElementById("busqueda").value.toLowerCase();
-        const filas = document.getElementById("tabla-cuerpo").getElementsByTagName("tr");
+    function filtrarDispositivos() {
+        const busqueda = document.getElementById("buscador").value.toLowerCase();
+        const filas = document.getElementsByClassName("device-row");
+
         for (let i = 0; i < filas.length; i++) {
-            filas[i].style.display = filas[i].textContent.toLowerCase().includes(query) ? "" : "none";
+            const texto = filas[i].textContent.toLowerCase();
+            filas[i].style.display = texto.includes(busqueda) ? "flex" : "none";
         }
     }
 
-    function actualizarConsumos() {
-        dispositivos.forEach(disp => { if (disp.online) disp.consumoGB += Math.random() * 12; });
-        renderizarPanel();
-    }
-
-    function restablecerContadores() {
-        dispositivos.forEach(disp => disp.consumoGB = 0);
-        renderizarPanel();
-    }
-
-    window.onload = renderizarPanel;
+    window.onload = actualizarInterfaz;
 </script>
 </body>
 </html>
